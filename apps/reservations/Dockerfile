@@ -1,4 +1,4 @@
-FROM node:alphine As development
+FROM node:alpine As development
 
 WORKDIR /usr/src/app
 
@@ -12,7 +12,7 @@ RUN pnpm install
 
 COPY . .
 
-RUN pnpm RUN build
+RUN pnpm run build
 
 # Production
 
@@ -24,7 +24,7 @@ ENV NODE_ENV={NODE_ENV}
 WORKDIR /usr/src/app
 
 COPY package.json ./
-COPY pnpm-lock.yam ./
+COPY pnpm-lock.yaml ./
 
 RUN npm install -g pnpm
 
@@ -32,4 +32,4 @@ RUN pnpm install --prod
 
 COPY --from=development /usr/src/app/dist ./dist
 
-RUN ["node", "dist/apps/reservations/main"]
+CMD  ["node", "dist/apps/reservations/main"]
