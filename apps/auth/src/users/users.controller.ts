@@ -10,4 +10,9 @@ export class UsersController {
   async createUser(@Body() createUserDTO: CreateUserDTO) {
     return this.usersService.createUser(createUserDTO);
   }
+
+  @Post('login')
+  async login(@Body() createUserDTO: CreateUserDTO) {
+    return this.usersService.login(createUserDTO);
+  }
 }
